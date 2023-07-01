@@ -3,13 +3,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         while(true) {
             try {
-                Scanner input = new Scanner(System.in);
-                System.out.println("Please, enter which dice do you want to use: ");
-                int dice = input.nextInt();
-                System.out.println("Please, enter how much dices you want to roll: ");
-                int roll = input.nextInt();
+                input.reset();
+                System.out.println("Please, enter your roll (ex. 2d6): ");
+                String userInput = input.nextLine();
+                String[] rollValues = userInput.split("d");
+
+                int dice = Integer.parseInt(rollValues[1]);
+                int roll = Integer.parseInt(rollValues[0]);
                 Random rand = new Random();
                 int total = 0;
                 for(int i = 0; i < roll; i++) {
@@ -18,10 +21,9 @@ public class Main {
                     System.out.println("Your roll is: " + result);
                 }
                 System.out.println("The result is: " + total);
-                input.close();
 
             } catch(Exception e){
-                System.out.println("Incorrect input! Please, enter a number!");
+                System.out.println("Incorrect input! " + e.getMessage());
             }
         }
     }
